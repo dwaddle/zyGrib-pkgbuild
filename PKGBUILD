@@ -27,7 +27,7 @@ prepare() {
 	if [ $(uname -m) == "i686" ]
 	then
 	    cd "$srcdir/$_upname-$pkgver"
-	    sed -i 's/\(^CFLAGS.*\)-m64\s\(.*\)-D.*$/\1\2/' makefile
+	    sed -i 's/\(^CFLAGS.*\)-m64\s\(.*\)-D.*$/\1\2/' src/g2clib/makefile
 	fi
 }
 
