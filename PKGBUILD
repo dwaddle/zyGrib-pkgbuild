@@ -23,11 +23,11 @@ DLAGENTS=('http::/usr/bin/curl -fLC - --cookie nada -o /dev/null %u --next --coo
 
 prepare() {
 	cd "$srcdir/$_upname-$pkgver"
-	sed -i 's/\(^.*image.inmem_=1.*$\)/\/\/\1/' src/g2clib/enc_jpeg2000.c 
+	sed -Ei 's:(^.*image.inmem_=1.*$)://\1:' src/g2clib/enc_jpeg2000.c 
 	if [ $(uname -m) == "i686" ]
 	then
 	    cd "$srcdir/$_upname-$pkgver"
-	    sed -i 's/\(^CFLAGS.*\)-m64\s\(.*\)-D.*$/\1\2/' src/g2clib/makefile
+	    sed -Ei 's:(^CFLAGS.*)-m64(.*)-D.*$:\1\2:' src/g2clib/makefile
 	fi
 }
 
