@@ -1,0 +1,12 @@
+diff --unified --recursive --text zyGrib-8.0.1/src/map/Projection.h zyGrib-8.0.1.new/src/map/Projection.h
+--- zyGrib-8.0.1/src/map/Projection.h	2016-11-09 17:27:38.000000000 +0100
++++ zyGrib-8.0.1.new/src/map/Projection.h	2019-09-10 10:20:27.440134499 +0200
+@@ -21,6 +21,8 @@
+ #include <QObject>
+ #include <cstdio>
+ 
++#define ACCEPT_USE_OF_DEPRECATED_PROJ_API_H
++
+ #include "proj_api.h"
+ 
+ class Projection : public QObject

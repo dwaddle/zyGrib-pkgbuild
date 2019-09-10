@@ -3,7 +3,7 @@
 pkgname=zygrib
 _upname=zyGrib # upstream, case-sensitive project name
 pkgver=8.0.1
-pkgrel=3
+pkgrel=4
 pkgdesc="Weather data visualization, GRIB file viewer"
 arch=('i686' 'x86_64')
 url="https://www.zygrib.org/"
@@ -13,11 +13,13 @@ optdepends=('zygrib-maps: gshhs high-resolution maps from zygrib.org')
 source=($_upname-$pkgver.tgz::https://www.zygrib.org/getfile.php?file=$_upname-$pkgver.tgz \
         zygrib.sh 
 	zygrib.desktop
-        zygrib.png)
+        zygrib.png
+	proj_deprecated_api.patch)
 sha256sums=('9c0490cbec74cea6d3c8f150bc745cb4c48f04969e10e91579fe01e56b9830f8'
             '57302878842678e4cc1f4fc25fac7f78ce87bfb24cfd7a46ccd9f99c6df32e5b'
             '2332353b1e681ffed5a189190c5ddf265336b064907cf2a0b085ba8d898a3ba1'
-            '7f9034ad3a496d68cbc0e7423695840d525903e61bf8071b0db337db24e6141f')
+            '7f9034ad3a496d68cbc0e7423695840d525903e61bf8071b0db337db24e6141f'
+	    '747a519a50a33206873b9c752a462faa591165556aaa018ad3184f5bb7351ea7')
 # creative commons licence
 DLAGENTS=('https::/usr/bin/curl -fLC - --cookie nada -o /dev/null %u --next --cookie nada  --retry-delay 3 -o %o %u')
 
@@ -29,6 +31,9 @@ prepare() {
 	    cd "$srcdir/$_upname-$pkgver"
 	    sed -Ei 's:(^CFLAGS.*)-m64(.*)-D.*$:\1\2:' src/g2clib/makefile
 	fi
+
+	cd "$srcdir/$_upname-$pkgver"
+	patch -p1 < "${srcdir}/proj_deprecated_api.patch"
 }
 
 build() {
